@@ -12,11 +12,23 @@ namespace Quest
         //  So it can be read and changed by any code in the application
         public int Awesomeness { get; set; }
 
+        // add a new immutable property called ColorfulRobe. Type should be Robe
+        public Robe ColorfulRobe { get; }
+        public Hat ColorfulHat { get; }
+
+        // add a new method called GetDescription. Should return a string that contains the adventurer's name and description of their robe
+        public string GetDescription()
+        {
+            return $"{Name} is wearing a {ColorfulRobe.Length} inch long robe that is {string.Join(", ", ColorfulRobe.Colors)}. Their hat is {ColorfulHat.ShininessDescription}.";
+        }
+
         // A constructor to make a new Adventurer object with a given name
-        public Adventurer(string name)
+        public Adventurer(string name, Robe colorfulRobe, Hat colorfulHat)
         {
             Name = name;
             Awesomeness = 50;
+            ColorfulRobe = colorfulRobe;
+            ColorfulHat = colorfulHat;
         }
 
 
