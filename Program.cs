@@ -129,12 +129,27 @@ namespace Quest
                 }
                 return randomChallenges;
             }
+            
+            int successfulChallenges = 0;
 
-            // Loop through 5 random challenges and subject the Adventurer to them
+             // Loop through 5 random challenges and subject the Adventurer to them
             foreach (Challenge challenge in RandomlyPickChallenges(challenges))
             {
                 challenge.RunChallenge(theAdventurer);
+
+                // Check if the challenge was successful and increment the successfulChallenges count
+                if (theAdventurer.Awesomeness >= challenge.AwesomenessChange)
+                {
+                    successfulChallenges++;
+                }
             }
+
+            // Multiply the successfulChallenges count by 10 and add it to the initial Awesomeness for the next quest
+            int awesomenessBonus = successfulChallenges * 10;
+            int nextQuestAwesomeness = theAdventurer.Awesomeness + awesomenessBonus;
+
+            Console.WriteLine($"Your awesomeness bonus for the next quest is: {awesomenessBonus}. Your total awesomeness is now: {nextQuestAwesomeness}.");
+
 
             // This code examines how Awesome the Adventurer is after completing the challenges
             // And praises or humiliates them accordingly
@@ -154,11 +169,11 @@ namespace Quest
             // offer prize if player has awesome score over 0 
             prize.ShowPrize(theAdventurer, "You win:");
             // offer the player to play again
-
-            Console.WriteLine("Would you like to play again? (Y/N)");
+            Console.WriteLine($"Your current awesomeness level is {theAdventurer.Awesomeness}. Would you like to play again? (Y/N)");
             string playAgain = Console.ReadLine().ToLower();
             if (playAgain == "y")
             {
+                theAdventurer.Awesomeness = nextQuestAwesomeness; // Update the adventurer's Awesomeness for the next quest
                 Main(args);
             }
             else
@@ -166,5 +181,5 @@ namespace Quest
                 Console.WriteLine("Goodbye!");
             }
         }
-    }
+}
 }

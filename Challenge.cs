@@ -24,6 +24,12 @@ namespace Quest
             _awesomenessChange = awesomenessChange;
         }
 
+        public int AwesomenessChange {
+            get {
+                return _awesomenessChange;
+            }
+        }
+
         // This method will take an Adventurer object and make that Adventurer perform the challenge
         public void RunChallenge(Adventurer adventurer)
         {
